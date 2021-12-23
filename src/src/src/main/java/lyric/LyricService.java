@@ -1,4 +1,4 @@
-package io.javabrains.springbootstarter.lyric;
+package lyric;
 
 import java.util.Arrays;
 import java.util.List;

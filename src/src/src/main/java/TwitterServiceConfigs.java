@@ -1,4 +1,4 @@
-import io.javabrains.springbootstarter.lyric.LyricService;
+import lyric.LyricService;
 import org.springframework.stereotype.Component;
 import twitter4j.Status;
 import twitter4j.Twitter;

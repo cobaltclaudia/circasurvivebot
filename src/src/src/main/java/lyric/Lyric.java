@@ -1,4 +1,4 @@
-package io.javabrains.springbootstarter.lyric;
+package lyric;
 
 public class Lyric {
 
