@@ -1,4 +1,5 @@
-import lyric.LyricService;
+package CircaSurviveBot;
+
 import org.springframework.stereotype.Component;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -19,7 +20,7 @@ public class TwitterServiceConfigs {
 
     @PostConstruct
     public static void runBot() throws TwitterException {
-        String lyric = new LyricService().getLyric().getLyric();
+        String lyric = new LyricService().getLyric().lyric();
         System.out.println(lyric);
         postTweet(lyric);
     }

@@ -1,4 +1,4 @@
-package lyric;
+package CircaSurviveBot;
 
 public class Lyric {
 
@@ -8,7 +8,7 @@ public class Lyric {
         this.lyric = lyric;
     }
 
-    public String getLyric(){
+    public String lyric(){
         return lyric;
     }
 

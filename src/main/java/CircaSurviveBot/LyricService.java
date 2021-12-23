@@ -1,4 +1,5 @@
-package lyric;
+package CircaSurviveBot;
+
 
 import java.util.Arrays;
 import java.util.List;
