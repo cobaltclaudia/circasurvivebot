@@ -1,4 +1,4 @@
-package CircaSurviveBot;
+package CircaSurviveBot.App;
 
 public class Lyric {
 

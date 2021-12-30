@@ -1,4 +1,4 @@
-package CircaSurviveBot;
+package CircaSurviveBot.App;
 
 
 import java.util.Arrays;
@@ -24,7 +24,6 @@ public class LyricService {
             new Lyric("It starts out like a season in reverse"),
             new Lyric("Too much all at once that's how you got so ungrateful"),
             new Lyric("Just shut your mouth")
-
     );
 
     public Lyric getLyric() {
