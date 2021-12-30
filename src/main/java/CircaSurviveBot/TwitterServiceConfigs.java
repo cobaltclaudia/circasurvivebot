@@ -19,17 +19,25 @@ public class TwitterServiceConfigs {
     private static final String TOKEN_SECRET = System.getenv("TOKEN_SECRET");
 
     @PostConstruct
-    public static void runBot() throws TwitterException {
+    public static void runTweetBot() throws TwitterException {
         String lyric = new LyricService().getLyric().lyric();
         System.out.println(lyric);
         postTweet(lyric);
     }
 
+    public static void main(String[] args) throws TwitterException {
+        System.out.println("safe camp");
+    }
+
     private static void postTweet(String message) throws TwitterException {
-        TwitterFactory twitterFactory = new TwitterFactory(getConfiguration());
-        Twitter twitter = twitterFactory.getInstance();
+        Twitter twitter = getTwitterClient();
         Status status = twitter.updateStatus(message);
         System.out.println(status);
+    }
+
+    private static Twitter getTwitterClient() {
+        TwitterFactory twitterFactory = new TwitterFactory(getConfiguration());
+        return twitterFactory.getInstance();
     }
 
     private static Configuration getConfiguration() {
