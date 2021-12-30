@@ -1,4 +1,4 @@
 # circasurvivebot
-a circa survive tweet bot
+A bot that tweets Circa Survive lyrics
 
-https://twitter.com/circasurvivebot
+<a href="https://twitter.com/circasurvivebot">https://twitter.com/circasurvivebot
