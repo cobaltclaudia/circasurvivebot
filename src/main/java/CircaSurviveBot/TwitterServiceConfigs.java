@@ -25,10 +25,6 @@ public class TwitterServiceConfigs {
         postTweet(lyric);
     }
 
-    public static void main(String[] args) throws TwitterException {
-        System.out.println("safe camp");
-    }
-
     private static void postTweet(String message) throws TwitterException {
         Twitter twitter = getTwitterClient();
         Status status = twitter.updateStatus(message);
