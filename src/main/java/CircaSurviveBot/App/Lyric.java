@@ -8,7 +8,7 @@ public class Lyric {
         this.lyric = lyric;
     }
 
-    public String lyric(){
+    public String getLyric(){
         return lyric;
     }
 

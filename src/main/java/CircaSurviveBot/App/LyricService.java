@@ -1,11 +1,12 @@
 package CircaSurviveBot.App;
 
+import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-@org.springframework.stereotype.Service
+@Service
 public class LyricService {
 
     private final List<Lyric> lyrics = Arrays.asList(
@@ -25,6 +26,10 @@ public class LyricService {
             new Lyric("Too much all at once that's how you got so ungrateful"),
             new Lyric("Just shut your mouth")
     );
+
+    public List<Lyric> getAllLyrics() {
+        return lyrics;
+    }
 
     public Lyric getLyric() {
         Random random = new Random();
