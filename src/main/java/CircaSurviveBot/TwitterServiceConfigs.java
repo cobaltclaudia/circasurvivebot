@@ -21,10 +21,11 @@ public class TwitterServiceConfigs {
     private static final String TOKEN_SECRET = System.getenv("TOKEN_SECRET");
 
     @PostConstruct
-    public static void runTweetBot() throws TwitterException {
+    public static void runTweetBot() throws TwitterException, InterruptedException {
         Lyric lyric = new LyricService().getLyric();
         System.out.println(lyric);
-        //postTweet(lyric.toString());
+        postTweet(lyric.toString());
+        Thread.sleep(300000);
     }
 
     private static void postTweet(String message) throws TwitterException {
