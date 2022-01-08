@@ -1,7 +1,7 @@
-package CircaSurviveBot;
+package CircaSurviveBot.App;
 
-import CircaSurviveBot.App.Lyric;
-import CircaSurviveBot.App.LyricService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
 import twitter4j.Status;
 import twitter4j.Twitter;
@@ -13,25 +13,19 @@ import twitter4j.conf.ConfigurationBuilder;
 import javax.annotation.PostConstruct;
 
 @Component
-public class TwitterServiceConfigs {
+public class TwitterServiceConfigs implements TwitterService {
 
     private static final String CONSUMER_KEY = System.getenv("CONSUMER_KEY");
     private static final String CONSUMER_SECRET = System.getenv("CONSUMER_SECRET");
     private static final String ACCESS_TOKEN = System.getenv("ACCESS_TOKEN");
     private static final String TOKEN_SECRET = System.getenv("TOKEN_SECRET");
 
-    @PostConstruct
-    public static void runTweetBot() throws TwitterException, InterruptedException {
-        Lyric lyric = new LyricService().getLyric();
-        System.out.println(lyric);
-        postTweet(lyric.toString());
-        Thread.sleep(300000);
-    }
+    @Autowired
+    Environment environment;
 
-    private static void postTweet(String message) throws TwitterException {
+    private static Status postTweet(String message) throws TwitterException {
         Twitter twitter = getTwitterClient();
-        Status status = twitter.updateStatus(message);
-        System.out.println(status);
+        return twitter.updateStatus(message);
     }
 
     private static Twitter getTwitterClient() {
@@ -47,6 +41,22 @@ public class TwitterServiceConfigs {
                 .setOAuthAccessToken(ACCESS_TOKEN)
                 .setOAuthAccessTokenSecret(TOKEN_SECRET)
                 .build();
+    }
+
+    @PostConstruct
+    public void runTweetBot() throws TwitterException {
+        Lyric lyric = new LyricService().getLyric();
+        System.out.println(lyric);
+        boolean keepAlive = true;
+        Status status = null;
+        try {
+            status = postTweet(lyric.getLyric());
+            System.out.println(status);
+            Thread.sleep(86400000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            System.out.println(status);
+        }
     }
 
 }
