@@ -1,4 +1,4 @@
-package CircaSurviveBot.App;
+package CircaSurviveBot.App.twitter;
 
 import org.springframework.stereotype.Component;
 import twitter4j.TwitterException;
