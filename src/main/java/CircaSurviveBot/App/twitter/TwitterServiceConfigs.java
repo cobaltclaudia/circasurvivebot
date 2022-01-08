@@ -51,7 +51,7 @@ public class TwitterServiceConfigs implements TwitterService {
         Status status = null;
         try {
             System.out.println(lyric);
-            status = postTweet(lyric.getLyric());
+            //status = postTweet(lyric.getLyric());
             Thread.sleep(43200000);
         } catch (InterruptedException e) {
             e.printStackTrace();
