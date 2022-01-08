@@ -48,16 +48,14 @@ public class TwitterServiceConfigs implements TwitterService {
     @PostConstruct
     public void runTweetBot() throws TwitterException {
         Lyric lyric = new LyricService().getLyric();
-        System.out.println(lyric);
-        boolean keepAlive = true;
         Status status = null;
         try {
+            System.out.println(lyric);
             status = postTweet(lyric.getLyric());
-            System.out.println(status);
-            Thread.sleep(86400000);
+            Thread.sleep(43200000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-            System.out.println(status);
+            System.out.println(status.getCreatedAt());
         }
     }
 
