@@ -13,6 +13,8 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
 import javax.annotation.PostConstruct;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 @Component
 public class TwitterServiceConfigs implements TwitterService {
@@ -47,10 +49,34 @@ public class TwitterServiceConfigs implements TwitterService {
 
     @PostConstruct
     public void runTweetBot() throws TwitterException {
-        Lyric lyric = new LyricService().getLyric();
-        Status status = null;
 
-        System.out.println(lyric);
+        Status status = getLastTweet();
+        Date lastTweetDate = status.getCreatedAt();
+        long timeDiff = getTimeDiff(lastTweetDate);
+
+        if (timeDiff >= TimeUnit.HOURS.toMillis(24)) {
+            Lyric lyric = new LyricService().getLyric();
+            System.out.println("Its been more than 24hrs!");
+            System.out.println(lyric);
+            status = postTweet(lyric.getLyric());
+            System.out.println(status.getCreatedAt());
+        } else {
+            System.out.println("Nope, check again later.");
+        }
+
+    }
+
+    private long getTimeDiff(Date lastTweetDate) {
+        long lastTweetLong = lastTweetDate.getTime();
+        long currentTime = new Date().getTime();
+
+        return currentTime - lastTweetLong;
+    }
+
+    private Status getLastTweet() throws TwitterException {
+        Twitter twitter = getTwitterClient();
+        twitter.timelines().getUserTimeline();
+        return twitter.timelines().getUserTimeline().get(0);
     }
 
 }
