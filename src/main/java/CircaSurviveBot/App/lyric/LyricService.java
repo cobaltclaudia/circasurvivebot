@@ -24,7 +24,22 @@ public class LyricService {
             new Lyric("Everyway you wonder if you're wrong"),
             new Lyric("It starts out like a season in reverse"),
             new Lyric("Too much all at once that's how you got so ungrateful"),
-            new Lyric("Just shut your mouth")
+            new Lyric("Just shut your mouth"),
+            new Lyric("Move one inch at a time, don't make shit rhyme"),
+            new Lyric("I siphon from you in ways I'm not"),
+
+            //Always get what you want
+            new Lyric("Do you often look back on us, feeling confidently?"),
+            new Lyric("It's the talent, not the promo shots"),
+            new Lyric("Story has shown you all felt alone."),
+
+            //child of the desert
+            new Lyric("All we have is somewhere to begin"),
+            new Lyric("Child of the desert, never had a name, climax on the concept of eliminating pain"),
+            new Lyric("Oh, all you save, dare I say, just give it away"),
+            new Lyric("Not sure how to make it real, how to take my time, how to come alive, I don't want to feel a thing, I don't want to know"),
+
+            new Lyric("I can feel the difference in what you make")
     );
 
     public List<Lyric> getAllLyrics() {
