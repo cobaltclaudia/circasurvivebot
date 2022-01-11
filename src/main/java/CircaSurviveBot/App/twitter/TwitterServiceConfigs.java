@@ -54,9 +54,9 @@ public class TwitterServiceConfigs implements TwitterService {
         Date lastTweetDate = status.getCreatedAt();
         long timeDiff = getTimeDiff(lastTweetDate);
 
-        if (timeDiff >= TimeUnit.HOURS.toMillis(6)) {
+        if (timeDiff >= TimeUnit.HOURS.toMillis(4)) {
             Lyric lyric = new LyricService().getLyric();
-            System.out.println("Its been more than 24hrs!");
+            System.out.println("Its been more than 4hrs!");
             System.out.println(lyric);
             status = postTweet(lyric.getLyric());
             System.out.println(status.getCreatedAt());
