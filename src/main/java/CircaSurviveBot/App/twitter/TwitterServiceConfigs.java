@@ -14,6 +14,7 @@ import twitter4j.conf.ConfigurationBuilder;
 
 import javax.annotation.PostConstruct;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
 
 @Component
@@ -27,9 +28,21 @@ public class TwitterServiceConfigs implements TwitterService {
     @Autowired
     Environment environment;
 
-    private static Status postTweet(String message) throws TwitterException {
+    @PostConstruct
+    public void runTweetBot() throws TwitterException {
+
+        Lyric lyric = new LyricService().getLyric();
+        Iterator<Status> iterator = getTwitterClient().getUserTimeline().listIterator();
+        System.out.println("Queued up lyric: "+lyric.getLyric());
+        if(!duplicate(lyric,iterator) && timeToPost()) {
+            System.out.println("postTweet: "+ lyric.getLyric());
+            postTweet(lyric.getLyric());
+        }
+    }
+
+    private static void postTweet(String message) throws TwitterException {
         Twitter twitter = getTwitterClient();
-        return twitter.updateStatus(message);
+        twitter.updateStatus(message);
     }
 
     private static Twitter getTwitterClient() {
@@ -47,30 +60,31 @@ public class TwitterServiceConfigs implements TwitterService {
                 .build();
     }
 
-    @PostConstruct
-    public void runTweetBot() throws TwitterException {
-
-        Status status = getLastTweet();
-        Date lastTweetDate = status.getCreatedAt();
-        long timeDiff = getTimeDiff(lastTweetDate);
-
-        if (timeDiff >= TimeUnit.HOURS.toMillis(4)) {
-            Lyric lyric = new LyricService().getLyric();
-            System.out.println("Its been more than 4hrs!");
-            System.out.println(lyric);
-            status = postTweet(lyric.getLyric());
-            System.out.println(status.getCreatedAt());
-        } else {
-            System.out.println("Nope, check again later.");
+    private boolean timeToPost() throws TwitterException {
+        if (getTimeDiff(getLastTweet().getCreatedAt()) >= TimeUnit.HOURS.toMillis(4)) {
+            System.out.println("Time to post.");
+            return true;
         }
+        System.out.println("Still need to wait.");
+        return false;
+    }
 
+    private boolean duplicate(Lyric lyric, Iterator<Status> iterator) {
+        int duplicateLimit = 5;
+        for (int i = 0; i <= duplicateLimit; i++) {
+            String postedLyric = iterator.next().getText();
+            if(lyric.getLyric().equals(postedLyric)){
+                System.out.println( i+": "+postedLyric);
+                System.out.println("Duplicate found");
+                return true;
+            }
+        }
+        System.out.println("Duplicate not found.");
+        return false;
     }
 
     private long getTimeDiff(Date lastTweetDate) {
-        long lastTweetLong = lastTweetDate.getTime();
-        long currentTime = new Date().getTime();
-
-        return currentTime - lastTweetLong;
+        return new Date().getTime() - lastTweetDate.getTime();
     }
 
     private Status getLastTweet() throws TwitterException {
