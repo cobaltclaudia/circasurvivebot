@@ -30,13 +30,15 @@ public class LyricService {
             new Lyric("It starts out like a season in reverse"),
             new Lyric("Move one inch at a time, don't make shit rhyme"),
             new Lyric("We disconnect, like this is the end."),
-            //20070529-05-001 - mandala
+            //20070529-05-000 - mandala
             new Lyric("Dance with me for I'll be leaving soon"),
-            //20070529-01-001 - living together
+            //20070529-01-000 - living together
             new Lyric("Would you trade your soul for gold?"),
             new Lyric("For your futures sake, I've got advice I'd advise you to take"),
-            //20070529-04-001 - diff between drug and meds
+            //20070529-04-000 - diff between drug and meds
             new Lyric("Just keep drinking water and you'll be alright"),
+            //20070529-03-000 - the greatest lie
+            new Lyric("We believe in something invisible"),
 
             //VIOLENT WAVES - 20120828
             //20120828-02-001 - sharp practice
@@ -66,11 +68,16 @@ public class LyricService {
             new Lyric("I siphon from you in ways I'm not"),
             //20170922-03-001-prem of hex
             new Lyric("You never see the things you have"),
+            new Lyric("And I heard you claim to be something like an expert in pain, so lets make believe"),
 
             //A DREAM ABOUT LOVE - 20211022
             //20211022-03-001-our last shot
             new Lyric("I can feel the difference in what you make"),
-            new Lyric("The future's silent when you love nothing")
+            new Lyric("American is burning from the inside out"),
+            new Lyric("You make it seem like you're the good guy all the time"),
+            new Lyric("The future's silent when you love nothing"),
+            new Lyric("Don't hesitate this might become just how it all was meant to end")
+
     );
 
     public List<Lyric> getAllLyrics() {
