@@ -61,7 +61,7 @@ public class TwitterServiceConfigs implements TwitterService {
     }
 
     private boolean timeToPost() throws TwitterException {
-        if (getTimeDiff(getLastTweet().getCreatedAt()) >= TimeUnit.HOURS.toMillis(4)) {
+        if (getTimeDiff(getLastTweet().getCreatedAt()) >= TimeUnit.HOURS.toMillis(1)) {
             System.out.println("Time to post.");
             return true;
         }
@@ -70,7 +70,7 @@ public class TwitterServiceConfigs implements TwitterService {
     }
 
     private boolean duplicate(Lyric lyric, Iterator<Status> iterator) {
-        int duplicateLimit = 5;
+        int duplicateLimit = 10;
         for (int i = 0; i <= duplicateLimit; i++) {
             String postedLyric = iterator.next().getText();
             if(lyric.getLyric().equals(postedLyric)){
