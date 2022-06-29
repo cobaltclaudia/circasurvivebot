@@ -1,7 +1,7 @@
 package CircaSurviveBot.App.twitter;
 
-import CircaSurviveBot.App.lyric.Lyric;
-import CircaSurviveBot.App.lyric.LyricService;
+import CircaSurviveBot.App.lyric.Song;
+import CircaSurviveBot.App.lyric.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;
@@ -13,6 +13,7 @@ import twitter4j.conf.Configuration;
 import twitter4j.conf.ConfigurationBuilder;
 
 import javax.annotation.PostConstruct;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.concurrent.TimeUnit;
@@ -31,12 +32,12 @@ public class TwitterServiceConfigs implements TwitterService {
     @PostConstruct
     public void runTweetBot() throws TwitterException {
 
-        Lyric lyric = new LyricService().getLyric();
         Iterator<Status> iterator = getTwitterClient().getUserTimeline().listIterator();
-        System.out.println("Queued up lyric: "+lyric.getLyric());
-        if(!duplicate(lyric,iterator) && timeToPost()) {
-            System.out.println("postTweet: "+ lyric.getLyric());
-            postTweet(lyric.getLyric());
+        if(timeToPost()) {
+            if(itsFriday()){
+                postTweet(new SongService().getVideo());
+            }
+            postTweet(new SongService().getLyric().getLyric());
         }
     }
 
@@ -69,7 +70,16 @@ public class TwitterServiceConfigs implements TwitterService {
         return false;
     }
 
-    private boolean duplicate(Lyric lyric, Iterator<Status> iterator) {
+    private boolean itsFriday(){
+        Calendar c1 = Calendar.getInstance();
+        if (c1.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
+            System.out.println("its friday!");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean duplicate(Song lyric, Iterator<Status> iterator) {
         int duplicateLimit = 10;
         for (int i = 0; i <= duplicateLimit; i++) {
             String postedLyric = iterator.next().getText();
