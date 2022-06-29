@@ -7,18 +7,23 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-public class LyricController {
+public class SongController {
 
     @Autowired
-    private LyricService lyricService;
+    private SongService lyricService;
 
     @RequestMapping("/lyric")
-    public Lyric getLyric() {
+    public Song getLyric() {
         return lyricService.getLyric();
     }
 
+    @RequestMapping("/video")
+    public String getvideo() {
+        return lyricService.getVideo();
+    }
+
     @RequestMapping("/lyrics")
-    public List<Lyric> getAllLyrics() {
+    public List<Song> getAllLyrics() {
         return lyricService.getAllLyrics();
     }
 
