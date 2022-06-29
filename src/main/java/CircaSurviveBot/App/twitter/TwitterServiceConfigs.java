@@ -1,7 +1,7 @@
 package CircaSurviveBot.App.twitter;
 
-import CircaSurviveBot.App.lyric.Song;
-import CircaSurviveBot.App.lyric.SongService;
+import CircaSurviveBot.App.Song.Song;
+import CircaSurviveBot.App.Song.SongService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Component;

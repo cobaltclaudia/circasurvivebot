@@ -1,9 +1,9 @@
-package CircaSurviveBot.App.lyric;
+package CircaSurviveBot.App.Song;
 
 public class Song {
 
-    private String lyric= "";
-    public String video= "";
+    private String lyric;
+    public String video;
 
     public Song(String lyric) {
         this.lyric = lyric;

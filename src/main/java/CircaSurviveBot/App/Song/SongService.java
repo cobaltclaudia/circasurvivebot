@@ -1,4 +1,4 @@
-package CircaSurviveBot.App.lyric;
+package CircaSurviveBot.App.Song;
 
 import org.springframework.stereotype.Service;
 
